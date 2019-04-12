@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.1.0" />
+    <PackageReference Include="PagedList.Core" Version="1.17.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\" />
+    <Folder Include="Views\Souvenir\" />
+    <Folder Include="Views\Customers\" />
+    <Folder Include="Views\Suppliers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Data\EmptyClass.cs" />
+    <Compile Remove="Models\Grade.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Views\Students\Delete.cshtml" />
+    <Content Remove="Views\Index.cshtml" />
+    <Content Remove="Views\Souvenir\Delete.cshtml" />
+    <Content Remove="Views\Customers\Delete.cshtml" />
+  </ItemGroup>
+</Project>

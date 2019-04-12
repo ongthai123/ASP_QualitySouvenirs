@@ -1,0 +1,110 @@
+﻿@model PaginatedList<QuanlitySouvenir.Models.Customer>
+
+@{
+    ViewData["Title"] = "Customer Management";
+}
+
+
+<h2>Customer Management</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by name: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-default" /> |
+            <a asp-action="Index">Back to Full List</a>
+        </p>
+    </div>
+</form>
+
+<table id="souvenir admin view" class="table">
+    <thead>
+        <tr>
+            <th>
+                @*<a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.Name)</a>*@
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Name</a>
+            </th>
+            @*<th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>*@
+            <th>
+                @* @Html.DisplayNameFor(model => model.Price) (NZ $)*@
+                Phone Number
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Description)*@
+                Email Address
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Image)*@
+                Address
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.SupplierID)*@
+                Enabled Status
+            </th>
+            <th>
+                Operations
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => item.EmailAddress)
+
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => item.Address)
+
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => item.Enabled)
+              
+
+
+                </th>
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.CustomerID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.CustomerID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.CustomerID">Delete</a> |
+                    <a asp-action="Disable" asp-route-id="@item.CustomerID">Disable</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>
